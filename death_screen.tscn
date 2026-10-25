@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://dgo4lae3f5w"]
+
+[ext_resource type="FontFile" uid="uid://bg6fdduub1oho" path="res://Assets/ui/Lilliput Steps.otf" id="1_if853"]
+[ext_resource type="AudioStream" uid="uid://ce2gsbcybp8i5" path="res://Assets/SFX/explosion.wav" id="2_ex68u"]
+
+[sub_resource type="GDScript" id="GDScript_if853"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	text = str(GameManager.Score)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_ex68u"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	text = str(GameManager.HighScore)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_6bi5g"]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+	
+	
+
+
+func _on_pressed() -> void:
+	GameManager.restart()
+"
+
+[node name="Death-Screen" type="Node" unique_id=1912561356]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=811035101]
+z_index = -1
+offset_left = -623.0
+offset_top = -414.0
+offset_right = -563.1102
+offset_bottom = -362.492
+scale = Vector2(20.521038, 15.783954)
+color = Color(0, 0, 0, 1)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=275661391]
+
+[node name="YouDiedLabel" type="Label" parent="." unique_id=188938456]
+offset_left = -209.0
+offset_top = -246.0
+offset_right = 209.0
+offset_bottom = -168.0
+pivot_offset_ratio = Vector2(0.5, 0)
+theme_override_colors/font_color = Color(0.85882354, 0.5882353, 0.57254905, 1)
+theme_override_fonts/font = ExtResource("1_if853")
+theme_override_font_sizes/font_size = 64
+text = "You Died!"
+horizontal_alignment = 1
+
+[node name="YourScoreWas" type="Label" parent="." unique_id=2052707569]
+offset_left = -161.0
+offset_top = -117.0
+offset_right = 189.0
+offset_bottom = -78.0
+theme_override_fonts/font = ExtResource("1_if853")
+theme_override_font_sizes/font_size = 32
+text = "Your Score Was:"
+
+[node name="ScoreLabel" type="Label" parent="YourScoreWas" unique_id=2077266032]
+layout_mode = 0
+offset_left = -316.0
+offset_top = 46.0
+offset_right = 636.0
+offset_bottom = 124.0
+pivot_offset_ratio = Vector2(0.5, 0)
+theme_override_colors/font_color = Color(0.5882353, 0.85882354, 0.5686275, 1)
+theme_override_fonts/font = ExtResource("1_if853")
+theme_override_font_sizes/font_size = 64
+text = "20230320"
+horizontal_alignment = 1
+script = SubResource("GDScript_if853")
+
+[node name="YourHighScoreIs" type="Label" parent="." unique_id=1147113220]
+offset_left = -211.39
+offset_top = 32.0
+offset_right = 233.61
+offset_bottom = 71.0
+theme_override_fonts/font = ExtResource("1_if853")
+theme_override_font_sizes/font_size = 32
+text = "Your high score is:"
+
+[node name="HighScoreLabel" type="Label" parent="YourHighScoreIs" unique_id=1494730952]
+layout_mode = 0
+offset_left = -265.61
+offset_top = 46.0
+offset_right = 686.39
+offset_bottom = 124.0
+pivot_offset_ratio = Vector2(0.5, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_if853")
+theme_override_font_sizes/font_size = 64
+text = "20230320"
+horizontal_alignment = 1
+script = SubResource("GDScript_ex68u")
+
+[node name="ReplayButton" type="Button" parent="." unique_id=714571318]
+offset_left = -136.0
+offset_top = 189.0
+offset_right = 146.0
+offset_bottom = 275.0
+theme_override_colors/font_hover_color = Color(0.5882353, 0.85882354, 0.5686275, 1)
+theme_override_fonts/font = ExtResource("1_if853")
+theme_override_font_sizes/font_size = 64
+text = "Replay"
+script = SubResource("GDScript_6bi5g")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1825904598]
+stream = ExtResource("2_ex68u")
+autoplay = true
+
+[connection signal="pressed" from="ReplayButton" to="ReplayButton" method="_on_pressed"]

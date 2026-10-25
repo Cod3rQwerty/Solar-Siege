@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://hj1n24v4g4qd"]
+
+[ext_resource type="PackedScene" uid="uid://wps0hpecyxnr" path="res://Scenes/Player.tscn" id="1_xkndl"]
+[ext_resource type="PackedScene" uid="uid://pligbdfvsk6d" path="res://Scenes/asteroid-big.tscn" id="2_u44n3"]
+[ext_resource type="PackedScene" uid="uid://h5awh74k7677" path="res://Scenes/Laser.tscn" id="3_u44n3"]
+
+[node name="Game" type="Node" unique_id=1160618253]
+
+[node name="Player" parent="." unique_id=166045792 instance=ExtResource("1_xkndl")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=228148175]
+scale = Vector2(1.0017673, 0.9818853)
+position_smoothing_enabled = true
+
+[node name="RigidBody2D" parent="." unique_id=955271741 instance=ExtResource("2_u44n3")]
+position = Vector2(-6, -167)
+scale = Vector2(1, 1.0116553)
+
+[node name="Laser" parent="." unique_id=1975303587 instance=ExtResource("3_u44n3")]
+position = Vector2(-393, 172)

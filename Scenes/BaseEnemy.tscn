@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://b7pqlnu1t0v8p"]
+
+[ext_resource type="Script" uid="uid://pc2ofmbso41d" path="res://Scripts/enemy.gd" id="1_1exfc"]
+[ext_resource type="Script" uid="uid://6k0bd8sk8xk8" path="res://Scripts/Components/chase_player.gd" id="1_wovta"]
+[ext_resource type="PackedScene" uid="uid://c16xrqrs8tpgr" path="res://Scenes/Lasers/StandardEnemyLaser.tscn" id="3_uoxpr"]
+[ext_resource type="Script" uid="uid://dvt4jo1w6gobd" path="res://Scripts/Components/laser_shooter.gd" id="3_xeo28"]
+[ext_resource type="AudioStream" uid="uid://bwg58egputktn" path="res://Assets/SFX/enemyshoot.wav" id="4_eo3k5"]
+[ext_resource type="Script" uid="uid://do1nuso8pwphg" path="res://Scripts/Components/health_component.gd" id="5_1exfc"]
+[ext_resource type="Texture2D" uid="uid://vfx5kfthqd7b" path="res://Assets/Sprites/enemy.png" id="5_j3pjd"]
+[ext_resource type="Script" uid="uid://c28gw8qicwv3" path="res://Scripts/Components/damage_component.gd" id="6_mo1ky"]
+[ext_resource type="Script" uid="uid://c31m81md2b351" path="res://Scripts/Components/hit_flash_component.gd" id="7_6bs3c"]
+[ext_resource type="AudioStream" uid="uid://btbikoxtuteme" path="res://Assets/SFX/enemydeath.wav" id="10_1jihc"]
+[ext_resource type="Script" uid="uid://cus14r2favc6f" path="res://Scripts/Components/health_bar_component.gd" id="11_gltnq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jihc"]
+atlas = ExtResource("5_j3pjd")
+region = Rect2(0, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gltnq"]
+atlas = ExtResource("5_j3pjd")
+region = Rect2(32, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6n1ky"]
+atlas = ExtResource("5_j3pjd")
+region = Rect2(64, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq62f"]
+atlas = ExtResource("5_j3pjd")
+region = Rect2(96, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrfxv"]
+atlas = ExtResource("5_j3pjd")
+region = Rect2(128, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0eh4"]
+atlas = ExtResource("5_j3pjd")
+region = Rect2(160, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wrmd"]
+atlas = ExtResource("5_j3pjd")
+region = Rect2(192, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fflh4"]
+atlas = ExtResource("5_j3pjd")
+region = Rect2(224, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fclwd"]
+atlas = ExtResource("5_j3pjd")
+region = Rect2(256, 0, 32, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3rc7q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jihc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gltnq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6n1ky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vq62f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrfxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0eh4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wrmd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fflh4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fclwd")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Enemy" type="CharacterBody2D" unique_id=852726340 groups=["Enemy"]]
+z_index = 3
+scale = Vector2(1.2, 1.2)
+collision_layer = 8
+collision_mask = 16
+script = ExtResource("1_1exfc")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="." unique_id=1969119254]
+z_index = 4
+position = Vector2(4.41, 0)
+rotation = 1.5707964
+polygon = PackedVector2Array(-9.437288e-07, -21.59, -12.999999, 18.41, 13.000001, 18.41)
+
+[node name="LaserShooter" type="Node2D" parent="." unique_id=1479381168 node_paths=PackedStringArray("ShootAudio")]
+z_index = 2
+position = Vector2(12.84, 0)
+script = ExtResource("3_xeo28")
+LaserNode = ExtResource("3_uoxpr")
+SpreadDegrees = 15.0
+ShootAudio = NodePath("AudioStreamPlayer2D")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="LaserShooter" unique_id=1168937857]
+stream = ExtResource("4_eo3k5")
+volume_db = -20.0
+
+[node name="ChasePlayer" type="Node" parent="." unique_id=1281066998]
+script = ExtResource("1_wovta")
+max_distance = 1000.0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1559210309]
+z_index = 3
+rotation = 1.5707964
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_3rc7q")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=138480037]
+script = ExtResource("5_1exfc")
+metadata/_custom_type_script = "uid://do1nuso8pwphg"
+
+[node name="DamageComponent" type="Area2D" parent="." unique_id=138229992 node_paths=PackedStringArray("Health_Component")]
+collision_mask = 16
+script = ExtResource("6_mo1ky")
+Health_Component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://c28gw8qicwv3"
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="DamageComponent" unique_id=720466119]
+z_index = 4
+position = Vector2(4.41, 0)
+rotation = 1.5707964
+polygon = PackedVector2Array(0, -23.455, -14, 19, 14, 19)
+
+[node name="HitAnimationComponent" type="Node" parent="." unique_id=812867257 node_paths=PackedStringArray("damage_component", "target_node")]
+script = ExtResource("7_6bs3c")
+damage_component = NodePath("../DamageComponent")
+target_node = NodePath("")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="." unique_id=557360135]
+stream = ExtResource("10_1jihc")
+
+[node name="HealthBarComponent" type="Node2D" parent="." unique_id=1680183033 node_paths=PackedStringArray("health_component", "health_bar_sprite")]
+script = ExtResource("11_gltnq")
+health_component = NodePath("../HealthComponent")
+health_bar_sprite = NodePath("../Sprite2D")
+metadata/_custom_type_script = "uid://cus14r2favc6f"
+
+[connection signal="died" from="HealthComponent" to="." method="_on_died"]

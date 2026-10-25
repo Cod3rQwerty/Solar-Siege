@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://cwh2s1owv200l"]
+
+[ext_resource type="FontFile" uid="uid://bg6fdduub1oho" path="res://Assets/ui/Lilliput Steps.otf" id="1_i26rj"]
+
+[sub_resource type="GDScript" id="GDScript_i26rj"]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_pressed() -> void:
+	GameManager.restart()
+"
+
+[sub_resource type="GDScript" id="GDScript_alls4"]
+script/source = "extends Button
+
+
+func _on_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://CreditsMenu.tscn\")
+"
+
+[node name="Main-Menu" type="Node" unique_id=893191159]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1343615561]
+offset_left = -656.0
+offset_top = -429.0
+offset_right = -616.0
+offset_bottom = -389.0
+scale = Vector2(32.734837, 22.079227)
+color = Color(0, 0, 0, 1)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1423003304]
+
+[node name="Label" type="Label" parent="." unique_id=1245664363]
+offset_left = -508.0
+offset_top = -292.0
+offset_right = 512.0
+offset_bottom = -137.0
+theme_override_colors/font_color = Color(0.85882354, 0.5882353, 0.57254905, 1)
+theme_override_fonts/font = ExtResource("1_i26rj")
+theme_override_font_sizes/font_size = 80
+text = "SOLAR SIEGE"
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="." unique_id=2072307237]
+offset_left = -94.0
+offset_top = -41.0
+offset_right = 97.0
+offset_bottom = 54.0
+theme_override_fonts/font = ExtResource("1_i26rj")
+theme_override_font_sizes/font_size = 64
+text = "PLAY"
+script = SubResource("GDScript_i26rj")
+
+[node name="CreditsButton" type="Button" parent="." unique_id=1816413404]
+offset_left = -164.0
+offset_top = 78.0
+offset_right = 164.0
+offset_bottom = 164.0
+theme_override_fonts/font = ExtResource("1_i26rj")
+theme_override_font_sizes/font_size = 64
+text = "CREDITs"
+script = SubResource("GDScript_alls4")
+
+[connection signal="pressed" from="PlayButton" to="PlayButton" method="_on_pressed"]
+[connection signal="pressed" from="CreditsButton" to="CreditsButton" method="_on_pressed"]

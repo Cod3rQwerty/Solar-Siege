@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://hj1n24v4g4qd"]
+
+[ext_resource type="PackedScene" uid="uid://wps0hpecyxnr" path="res://Scenes/Player.tscn" id="1_xkndl"]
+[ext_resource type="PackedScene" uid="uid://pligbdfvsk6d" path="res://Scenes/Big-Asteroid.tscn" id="2_xkndl"]
+[ext_resource type="Script" uid="uid://b71qeuov6dlq1" path="res://Scripts/enemy_spawner.gd" id="3_u44n3"]
+[ext_resource type="PackedScene" uid="uid://b7pqlnu1t0v8p" path="res://Scenes/Enemy.tscn" id="4_sb48q"]
+
+[node name="Game" type="Node" unique_id=1160618253]
+
+[node name="Player" parent="." unique_id=166045792 instance=ExtResource("1_xkndl")]
+unique_name_in_owner = true
+z_index = 5
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=228148175]
+scale = Vector2(0.4477915, 0.43890426)
+position_smoothing_enabled = true
+
+[node name="Big Asteroid" parent="." unique_id=955271741 instance=ExtResource("2_xkndl")]
+position = Vector2(-368, -149.99997)
+
+[node name="EnemySpawner" type="Node2D" parent="." unique_id=1133693505]
+position = Vector2(300, -215)
+script = ExtResource("3_u44n3")
+max_asteroid_speed = 600.0
+angle_variance = 18.0
+max_angular_velocity = 20.0
+
+[node name="Timer" type="Timer" parent="EnemySpawner" unique_id=1708475272]
+autostart = true
+
+[node name="Enemy" parent="." unique_id=852726340 instance=ExtResource("4_sb48q")]
+position = Vector2(-64, -214)

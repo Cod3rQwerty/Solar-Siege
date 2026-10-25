@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://wps0hpecyxnr"]
+
+[ext_resource type="Script" uid="uid://byeigyjidpgqc" path="res://Scripts/player.gd" id="1_kyqiw"]
+[ext_resource type="Texture2D" uid="uid://c7p3mhsp1n2c0" path="res://Assets/Sprites/player.png" id="2_gntrk"]
+[ext_resource type="Script" uid="uid://dvt4jo1w6gobd" path="res://Scripts/laser_shooter.gd" id="3_gntrk"]
+[ext_resource type="PackedScene" uid="uid://h5awh74k7677" path="res://Scenes/Lasers/LaserBase.tscn" id="4_dewec"]
+[ext_resource type="Script" uid="uid://do1nuso8pwphg" path="res://Scripts/health_component.gd" id="5_5ixxa"]
+[ext_resource type="Script" uid="uid://c28gw8qicwv3" path="res://Scripts/damage_component.gd" id="6_nn08x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dewec"]
+atlas = ExtResource("2_gntrk")
+region = Rect2(0, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ixxa"]
+atlas = ExtResource("2_gntrk")
+region = Rect2(32, 0, 32, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3rc7q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dewec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ixxa")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3rc7q"]
+radius = 5.0
+height = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3rc7q"]
+radius = 5.0
+
+[node name="Player" type="CharacterBody2D" unique_id=166045792 groups=["Player"]]
+z_index = 10
+scale = Vector2(2.237129, 2.237129)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_kyqiw")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=804453879]
+position = Vector2(-1.3410053, 0)
+rotation = 1.5707964
+scale = Vector2(0.8733754, 0.8733754)
+sprite_frames = SubResource("SpriteFrames_3rc7q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1822741230]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_3rc7q")
+
+[node name="LaserShooter" type="Node2D" parent="." unique_id=1844591301]
+position = Vector2(14.93, 0)
+script = ExtResource("3_gntrk")
+LaserNode = ExtResource("4_dewec")
+metadata/_custom_type_script = "uid://dvt4jo1w6gobd"
+
+[node name="FireRateTimer" type="Timer" parent="." unique_id=551008031]
+wait_time = 0.1
+one_shot = true
+
+[node name="HealthComponent" type="Node" parent="." unique_id=165662107]
+script = ExtResource("5_5ixxa")
+max_health = 500
+metadata/_custom_type_script = "uid://do1nuso8pwphg"
+
+[node name="DamageComponent" type="Area2D" parent="." unique_id=4412092 node_paths=PackedStringArray("Health_Component")]
+collision_mask = 36
+script = ExtResource("6_nn08x")
+Health_Component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://c28gw8qicwv3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageComponent" unique_id=863290399]
+shape = SubResource("CircleShape2D_3rc7q")
+debug_color = Color(0.95199066, 0.15249291, 0.40892988, 0.41960785)

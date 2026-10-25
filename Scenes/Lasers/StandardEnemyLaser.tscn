@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c16xrqrs8tpgr"]
+
+[ext_resource type="PackedScene" uid="uid://h5awh74k7677" path="res://Scenes/Lasers/LaserBase.tscn" id="1_ywhxu"]
+
+[node name="StandardEnemyLaser" unique_id=1975303587 instance=ExtResource("1_ywhxu")]
+collision_layer = 32
+collision_mask = 2
+damage = 10
+
+[node name="Sprite2D" parent="." index="0" unique_id=1971573135]
+region_rect = Rect2(16, 6, 16, 4)
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1712539062]
+position = Vector2(-0.115, 0.215)

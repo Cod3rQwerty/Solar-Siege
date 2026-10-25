@@ -1,0 +1,189 @@
+[gd_scene format=3 uid="uid://pligbdfvsk6d"]
+
+[ext_resource type="Script" uid="uid://bftktim0msc4c" path="res://Scripts/asteroid_big.gd" id="1_stvi7"]
+[ext_resource type="Texture2D" uid="uid://ctyp80j81crfu" path="res://Assets/Sprites/asteroid-big.png" id="2_stvi7"]
+[ext_resource type="Script" uid="uid://do1nuso8pwphg" path="res://Scripts/Components/health_component.gd" id="3_ep4ok"]
+[ext_resource type="Script" uid="uid://cdwp1klkqc4b7" path="res://Scripts/Components/delete_when_off_screen.gd" id="4_x7dgc"]
+[ext_resource type="Script" uid="uid://c28gw8qicwv3" path="res://Scripts/Components/damage_component.gd" id="5_ep4ok"]
+[ext_resource type="Script" uid="uid://c31m81md2b351" path="res://Scripts/Components/hit_flash_component.gd" id="6_jn7qh"]
+[ext_resource type="AudioStream" uid="uid://d1td1i5k1vvie" path="res://Assets/SFX/asteroideath.wav" id="7_sinvu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7dgc"]
+atlas = ExtResource("2_stvi7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ep4ok"]
+atlas = ExtResource("2_stvi7")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn7qh"]
+atlas = ExtResource("2_stvi7")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stvi7"]
+atlas = ExtResource("2_stvi7")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sinvu"]
+atlas = ExtResource("2_stvi7")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6e61m"]
+atlas = ExtResource("2_stvi7")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avr75"]
+atlas = ExtResource("2_stvi7")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctq1g"]
+atlas = ExtResource("2_stvi7")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgctn"]
+atlas = ExtResource("2_stvi7")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3rc7q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7dgc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ep4ok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn7qh")
+}],
+"loop": 1,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stvi7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sinvu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6e61m")
+}],
+"loop": 1,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avr75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctq1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgctn")
+}],
+"loop": 1,
+"name": &"3",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3rc7q"]
+radius = 60.0
+
+[sub_resource type="Animation" id="Animation_stvi7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2.8, 2.8)]
+}
+
+[sub_resource type="Animation" id="Animation_x7dgc"]
+resource_name = "hit-pulse"
+length = 0.06666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.06666666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(2.8, 2.8), Vector2(3, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ep4ok"]
+_data = {
+&"RESET": SubResource("Animation_stvi7"),
+&"hit-pulse": SubResource("Animation_x7dgc")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uuvw6"]
+radius = 61.0
+
+[node name="Big Asteroid" type="Area2D" unique_id=1993449016 groups=["Asteroid"]]
+z_index = 2
+scale = Vector2(1, 1.0069269)
+collision_layer = 4
+collision_mask = 18
+script = ExtResource("1_stvi7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1380121301]
+scale = Vector2(2.8, 2.8)
+sprite_frames = SubResource("SpriteFrames_3rc7q")
+animation = &"3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1980978244]
+shape = SubResource("CircleShape2D_3rc7q")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=249986004]
+script = ExtResource("3_ep4ok")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=871313470]
+libraries/ = SubResource("AnimationLibrary_ep4ok")
+
+[node name="DeleteWhenOffScreen" type="Node" parent="." unique_id=1675170604 node_paths=PackedStringArray("visible_notifier", "off_screen_timer")]
+script = ExtResource("4_x7dgc")
+visible_notifier = NodePath("VisibleOnScreenNotifier2D")
+off_screen_timer = NodePath("Timer")
+off_screen_time_allowed = 30.0
+metadata/_custom_type_script = "uid://cdwp1klkqc4b7"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="DeleteWhenOffScreen" unique_id=106873386]
+
+[node name="Timer" type="Timer" parent="DeleteWhenOffScreen" unique_id=1904893773]
+
+[node name="DamageComponent" type="Area2D" parent="." unique_id=1396809204 node_paths=PackedStringArray("Health_Component")]
+collision_layer = 4
+collision_mask = 16
+script = ExtResource("5_ep4ok")
+Health_Component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageComponent" unique_id=775070000]
+shape = SubResource("CircleShape2D_uuvw6")
+debug_color = Color(0.9200152, 0.13584667, 0.61221164, 0.41960785)
+
+[node name="HitAnimationComponent" type="Node" parent="." unique_id=1924516305 node_paths=PackedStringArray("damage_component", "target_node")]
+script = ExtResource("6_jn7qh")
+damage_component = NodePath("../DamageComponent")
+target_node = NodePath("../AnimatedSprite2D")
+hit_scale_multiplier = 0.9
+flash_duration = 0.1
+metadata/_custom_type_script = "uid://c31m81md2b351"
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="." unique_id=1350645991]
+stream = ExtResource("7_sinvu")
+
+[connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
+[connection signal="died" from="HealthComponent" to="." method="_on_died"]

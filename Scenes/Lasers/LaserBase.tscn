@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://h5awh74k7677"]
+
+[ext_resource type="Script" uid="uid://15mnuslshkfd" path="res://Scripts/laser.gd" id="1_7lyxe"]
+[ext_resource type="Texture2D" uid="uid://cy3l2xpe4l2vu" path="res://Assets/Sprites/lasers.png" id="2_65kjg"]
+[ext_resource type="Script" uid="uid://cdwp1klkqc4b7" path="res://Scripts/Components/delete_when_off_screen.gd" id="3_kacxd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3rc7q"]
+radius = 2.0
+height = 18.0
+
+[node name="Laser" type="Area2D" unique_id=1975303587 groups=["Laser"]]
+collision_layer = 16
+collision_mask = 12
+script = ExtResource("1_7lyxe")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1971573135]
+position = Vector2(0.5, 0.2)
+scale = Vector2(1.5333333, 2.142857)
+texture = ExtResource("2_65kjg")
+region_enabled = true
+region_rect = Rect2(-0.0069885254, 4.446682, 15.622755, 7.27248)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1712539062]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_3rc7q")
+
+[node name="DeleteWhenOffScreen" type="Node" parent="." unique_id=1419562528 node_paths=PackedStringArray("visible_notifier", "off_screen_timer", "target_node")]
+script = ExtResource("3_kacxd")
+visible_notifier = NodePath("VisibleOnScreenNotifier2D")
+off_screen_timer = NodePath("OffScreenTimer")
+off_screen_time_allowed = 5.0
+target_node = NodePath("..")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="DeleteWhenOffScreen" unique_id=130937390]
+rect = Rect2(-10, -2, 20, 4)
+
+[node name="OffScreenTimer" type="Timer" parent="DeleteWhenOffScreen" unique_id=2034042670]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="DeleteWhenOffScreen/VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]
+[connection signal="timeout" from="DeleteWhenOffScreen/OffScreenTimer" to="." method="_on_off_screen_timer_timeout"]

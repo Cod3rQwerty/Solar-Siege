@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://b4itc2osogcb1"]
+
+[ext_resource type="FontFile" uid="uid://bg6fdduub1oho" path="res://Assets/ui/Lilliput Steps.otf" id="1_1s42i"]
+
+[sub_resource type="GDScript" id="GDScript_mjexr"]
+script/source = "extends RichTextLabel
+
+
+func _on_meta_clicked(meta: Variant) -> void:
+	OS.shell_open(str(meta))
+"
+
+[sub_resource type="GDScript" id="GDScript_alls4"]
+script/source = "extends Button
+
+
+func _on_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://MainMenu.tscn\")
+"
+
+[node name="CreditsMenu" type="Node" unique_id=1727390652]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=336432341]
+offset_left = -620.0
+offset_top = -366.0
+offset_right = 700.0
+offset_bottom = 382.0
+color = Color(0, 0, 0, 1)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1518155275]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1604741578]
+offset_left = -515.0
+offset_top = -162.0
+offset_right = 515.0
+offset_bottom = 159.0
+theme_override_fonts/normal_font = ExtResource("1_1s42i")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Game Art Inspiration and Font:
+ [url=https://hat-tap.itch.io/asteroids-asset-pack]Hat-Tap-Games[/url]
+
+Background Music:
+ [url=https://opengameart.org/content/space-dimensions-techno-version]Main Theme by n-Dimensions[/url]
+"
+horizontal_alignment = 1
+script = SubResource("GDScript_mjexr")
+
+[node name="Label" type="Label" parent="." unique_id=621184190]
+offset_left = -20.0
+offset_top = -290.0
+offset_right = 20.0
+offset_bottom = -267.0
+
+[node name="Label2" type="Label" parent="." unique_id=1791661459]
+offset_left = -508.0
+offset_top = -292.0
+offset_right = 512.0
+offset_bottom = -137.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_1s42i")
+theme_override_font_sizes/font_size = 80
+text = "CREDITS"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="." unique_id=1772347522]
+offset_left = -97.0
+offset_top = 191.0
+offset_right = 94.0
+offset_bottom = 286.0
+theme_override_fonts/font = ExtResource("1_1s42i")
+theme_override_font_sizes/font_size = 64
+text = "BACK
+"
+script = SubResource("GDScript_alls4")
+
+[connection signal="meta_clicked" from="RichTextLabel" to="RichTextLabel" method="_on_meta_clicked"]
+[connection signal="pressed" from="BackButton" to="BackButton" method="_on_pressed"]

@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bo3tsnsd5u65d"]
+
+[ext_resource type="FontFile" uid="uid://bg6fdduub1oho" path="res://Assets/ui/Lilliput Steps.otf" id="1_sd512"]
+
+[sub_resource type="GDScript" id="GDScript_jo1ms"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	text = str(GameManager.Score)
+"
+
+[node name="HUD" type="CanvasLayer" unique_id=817577366]
+
+[node name="Control" type="Control" parent="." unique_id=984957685]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScoreLabel" type="Label" parent="Control" unique_id=133386990]
+layout_mode = 0
+offset_left = 12.0
+offset_top = -2.0
+offset_right = 147.0
+offset_bottom = 74.0
+scale = Vector2(1.0015061, 1)
+theme_override_fonts/font = ExtResource("1_sd512")
+theme_override_font_sizes/font_size = 63
+text = "200"
+script = SubResource("GDScript_jo1ms")
